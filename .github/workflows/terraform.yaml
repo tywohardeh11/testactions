@@ -1,0 +1,22 @@
+name: "terraform"
+
+on: {push}
+
+jobs: 
+  terraform:
+  runs-on: ubuntu-latest
+  steps:
+    - name: checkout
+      uses: actions/checkout@v3
+    - name: Setup terraform
+      uses: hashocorp/setup-terraform@vs
+      with:
+        terraform_cversion: 1.1.9
+    - name: terraform init
+      run: terraform init
+    - name: terraform validate
+      run: terraform validate
+    - name: format
+      run: terraform fmt -check
+    - name: plan
+      run: terraform plan
